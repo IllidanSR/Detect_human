@@ -589,7 +589,7 @@ def visualize_boxes_and_labels_on_image_array(
   # Create a display string (and color) for every box location, group any boxes
   # that correspond to the same location.
   box_to_display_str_map = collections.defaultdict(list)
-  FILENAME = "data.csv"
+  FILENAME = "report/report_human.csv"
   box_to_color_map = collections.defaultdict(str)
 #   print(box_to_color_map)
   box_to_instance_masks_map = {}
