@@ -13,12 +13,6 @@ PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
 # List of the strings that is used to add correct label for each box.
 PATH_TO_LABELS = os.path.join('data', 'mscoco_label_map.pbtxt')
 
-PATH_TO_TEST_IMAGES_DIR = 'test_images'
-TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, 'test{}.png'.format(i)) for i in range(2, 13)]
-
-# Size, in inches, of the output images.
-IMAGE_SIZE = (12, 8)
-NUM_CLASSES = 90
 
 
 def benchmark(func):
@@ -51,7 +45,7 @@ def main_func():
             od_graph_def.ParseFromString(serialized_graph)
             tf.import_graph_def(od_graph_def, name='')
     label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
-    categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
+    categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=90, use_display_name=True)
     category_index = label_map_util.create_category_index(categories)
     with detection_graph.as_default():
         with tf.Session(graph=detection_graph) as sess:
