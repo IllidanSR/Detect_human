@@ -1,0 +1,5 @@
+{
+  "detect_human_test.py::TestDetectHuman::()::test_type_error": true,
+  "test_visualization_utils.py::VisualizationUtilsTest::test_add_cdf_image_summary": true,
+  "test_visualization_utils.py::VisualizationUtilsTest::test_draw_bounding_boxes_on_image_tensors": true
+}

@@ -2,7 +2,7 @@ import matplotlib; matplotlib.use('Agg')
 import numpy as np
 import os
 import tensorflow as tf
-from face_detect.Face_recognition import Face_recogn
+# from face_detect.Face_recognition import Face_recogn
 import cv2
 from utils import label_map_util
 from utils import visualization_utils as vis_util
@@ -31,7 +31,7 @@ def benchmark(func):
 #         (im_height, im_width, 3)).astype(np.uint8)
 def main_func(args):
     cap = cv2.VideoCapture(args)
-    face_detect = Face_recogn()
+    # face_detect = Face_recogn()
     detection_graph = tf.Graph()
     with detection_graph.as_default():
         od_graph_def = tf.GraphDef()
@@ -69,7 +69,7 @@ def main_func(args):
                     category_index,
                     use_normalized_coordinates=True,
                     line_thickness=8)
-                image_np = face_detect.recogn_face(image_np)
+                # image_np = face_detect.recogn_face(image_np)
                 cv2.imshow('object detection', cv2.resize(image_np, (800, 600)))
                 if cv2.waitKey(25) & 0xFF == ord('q'):
                     cv2.destroyAllWindows()
