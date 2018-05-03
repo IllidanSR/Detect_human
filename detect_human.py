@@ -29,8 +29,8 @@ def benchmark(func):
 #     (im_width, im_height) = image.size
 #     return np.array(image.getdata()).reshape(
 #         (im_height, im_width, 3)).astype(np.uint8)
-def main_func():
-    cap = cv2.VideoCapture(0)
+def main_func(args):
+    cap = cv2.VideoCapture(args)
     face_detect = Face_recogn()
     detection_graph = tf.Graph()
     with detection_graph.as_default():
@@ -75,4 +75,4 @@ def main_func():
                     cv2.destroyAllWindows()
                     break
 if __name__ == "__main__":
-    main_func()
+    main_func(0)
