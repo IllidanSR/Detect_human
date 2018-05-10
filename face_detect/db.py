@@ -19,7 +19,7 @@ import json
 def incert(Name, arr):
     con = sqlite3.connect("some.db")
     cur = con.cursor()
-    cur.execute("create table test (idx int primary key, Enc varchar);")
+    # cur.execute("create table test (idx int primary key, Enc varchar);")
     cur.execute("insert into test (idx, Enc) values (?,?)",(Name, arr))
     con.commit()
     con.close()
@@ -46,4 +46,4 @@ def read_name():
     con.close()
     return data
 if __name__ == "__main__":
-    print(read())
+    print(list(read_name()[0]))

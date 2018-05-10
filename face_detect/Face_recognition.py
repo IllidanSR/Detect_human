@@ -4,17 +4,15 @@ import numpy as np
 import io
 import json
 import sqlite3
-from face_detect import test
+from face_detect import db
 class Face_recogn:
     def __init__(self):
-        self.my_face_enc = test.read()
+        self.my_face_enc = db.read()
 
         self.known_face_encodings = [
             self.my_face_enc
         ]
-        self.known_face_names = [
-            "Sergei"
-        ]
+        self.known_face_names = list(db.read_name()[0])
 
     def recogn_face(self, frame):
         rgb_frame = frame[:, :, ::-1]
@@ -26,6 +24,8 @@ class Face_recogn:
             if True in matches:
                 first_match_index = matches.index(True)
                 name = self.known_face_names[first_match_index]
+            # else:
+            #     test.incert("someone", face_encoding)
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
             cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
             font = cv2.FONT_HERSHEY_DUPLEX
