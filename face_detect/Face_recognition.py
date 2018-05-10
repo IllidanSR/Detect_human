@@ -1,9 +1,5 @@
 import face_recognition
 import cv2
-import numpy as np
-import io
-import json
-import sqlite3
 from face_detect import db
 class Face_recogn:
     def __init__(self):

@@ -1,20 +1,5 @@
 import sqlite3
 import numpy as np
-import io
-import os
-import time
-import sys
-import mnist
-import json
-# Name = "Sergei"
-# con = sqlite3.connect("some.db")
-# cur = con.cursor()
-# cur.execute("create table test_new (idx int primary key, Name varchar Enc varchar);")
-# cur.execute("insert into test (idx, Enc) values (?,?)",(Name, arr))
-# cur.execute("select Enc from main.test")
-# data = cur.fetchall()
-# print(np.fromstring(data[0][0]))
-# con.commit()
 
 def incert(Name, arr):
     con = sqlite3.connect("some.db")
