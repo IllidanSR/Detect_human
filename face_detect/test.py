@@ -24,14 +24,26 @@ def incert(Name, arr):
     con.commit()
     con.close()
 def read():
-    con = sqlite3.connect("face_detect/some.db")
+    if __name__ == "__main__":
+        con = sqlite3.connect("some.db")
+    else:
+        con = sqlite3.connect("face_detect/some.db")
     cur = con.cursor()
     cur.execute("select Enc from test")
     data = cur.fetchall()
-    # print(data)
+
     data = np.fromstring(data[0][0])
     con.close()
     return data
-
+def read_name():
+    if __name__ == "__main__":
+        con = sqlite3.connect("some.db")
+    else:
+        con = sqlite3.connect("face_detect/some.db")
+    cur = con.cursor()
+    cur.execute("select idx from test")
+    data = cur.fetchall()
+    con.close()
+    return data
 if __name__ == "__main__":
     print(read())
