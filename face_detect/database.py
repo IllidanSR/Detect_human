@@ -1,44 +1,53 @@
 import sqlite3
-import face_recognition
-import json
-class DB:
-    def __init__(self):
-        self.conn = sqlite3.connect('database.db')
-        self.cur = self.conn.cursor()
-        self.cur = self.conn.execute("CREATE TABLE HUMAN(id text, encoder text)")
+import numpy as np
+import io
+import time
+import os
 
-    def write_2_db(self,image):
-        my_face = face_recognition.load_image_file(image)
-        my_face_encoding = face_recognition.face_encodings(my_face)[0]
-        print(my_face_encoding)
-        # print(my_face_encoding)
-        self.cur.execute("INSERT INTO HUMAN VALUES (?,?)", ("Sergei", chr(my_face_encoding)))
-        self.conn.commit()
-        # data = self.cur.execute("SELECT * FROM HUMAN")
-        # data = self.cur.fetchall()
-        # print(my_list)
-        # print(type(my_face_encoding))
-    def write(self, image):
-        my_face = face_recognition.load_image_file(image)
-        my_face_encoding = face_recognition.face_encodings(my_face)[0]
-        conn = sqlite3.connect('database.db')
-        c = conn.cursor()
-        c.execute("INSERT INTO HUMAN VALUES (?,?)",(17081993,my_face_encoding))
-        conn.commit()
-        conn.close()
-    def read(self):
-        conn = sqlite3.connect('database.db')
-        c = conn.cursor()
-        c.execute("SELECT * FROM  HUMAN")
-        result = c.fetchall()
-        conn.close()
-        return result
+# compressor = 'bz2'  # zlib, bz2
 
-    def find_in_db(self):
-        conn = sqlite3.connect('database.db')
-        c = conn.cursor()
-        c.execute("")
-if __name__ == "__main__":
-    db = DB()
-    db.write_2_db("Sergei.jpg")
-    print(db.read())
+def adapt_array(arr):
+    """
+    http://stackoverflow.com/a/31312102/190597 (SoulNibbler)
+    """
+    # zlib uses similar disk size that Matlab v5 .mat files
+    # bz2 compress 4 times zlib, but storing process is 20 times slower.
+    out = io.BytesIO()
+    np.save(out, arr)
+    out.seek(0)
+    return sqlite3.Binary(out.read().encode())  # zlib, bz2
+
+def convert_array(text):
+    out = io.BytesIO(text)
+    out.seek(0)
+    out = io.BytesIO(out.read().encode())
+    return np.load(out)
+
+sqlite3.register_adapter(np.ndarray, adapt_array)
+sqlite3.register_converter("array", convert_array)
+
+
+dbname = 'example.db'
+def save_sqlite_arrays(Name,arr):
+    "Load MNIST database (70000 samples) and store in a compressed SQLite db"
+    os.path.exists(dbname) and os.unlink(dbname)
+    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
+    cur = con.cursor()
+    cur.execute("create table test (idx text primary key, Enc array);")
+    cur.execute("insert into test (idx, Enc) values (?,?)",(Name, arr))
+    con.commit()
+    con.close()
+
+def load_sqlite_arrays():
+    "Query MNIST SQLite database and load some samples"
+    con = sqlite3.connect(dbname, detect_types=sqlite3.PARSE_DECLTYPES)
+    cur = con.cursor()
+    cur.execute('select Enc from test')
+    data = cur.fetchall()
+    return data
+
+
+if __name__ == '__main__':
+    pass
+    #
+    load_sqlite_arrays()

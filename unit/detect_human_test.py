@@ -1,5 +1,6 @@
 import pytest
 from detect_human import main_func
+import tensorflow
 
 class TestDetectHuman:
     def test_type_error(self):
