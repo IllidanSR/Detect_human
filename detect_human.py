@@ -9,7 +9,7 @@ from utils import visualization_utils as vis_util
 
 MODEL_NAME = 'model'
 PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
-PATH_TO_LABELS = os.path.join('data', 'mscoco_label_map.pbtxt')
+PATH_TO_LABELS = os.path.join('data', 'model_label_map.pbtxt')
 
 
 
