@@ -1,4 +1,4 @@
 To use, install lib: tensorflow(1.4 and older), opencv, dlib, face_recognition, PIL.
   Easy installer dlib:(project/dlib_easy_install_for_python)
   Detect human, calc in frame, write to CSV, added db, check db errors.
-  SQlite3 DB connected, face save. Next step - module auto add human face
+  SQlite3 DB connected, face save. Added manual face add to DB. Next step - module auto add human face
