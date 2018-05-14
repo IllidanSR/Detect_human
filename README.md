@@ -1,4 +1,11 @@
-To use, install lib: tensorflow(1.4 and older), opencv, dlib, face_recognition, PIL.
-  Easy installer dlib:(project/dlib_easy_install_for_python)
-  Detect human, calc in frame, write to CSV, added db, check db errors.
-  SQlite3 DB connected, face save. Added manual face add to DB. Next step - module auto add human face
+# Tensorflow Human Detector
+Система подсчитывает колличество людей в кадре, записывая данные в CSV файл, с текущим временем. Оцифрованные лица хранятся в локальной БД и при работе программы просиходит постоянная проверка, есть ли человек в БД. В случае обнаружения, он отмечается в кадре, если человек отсутствует в кадре - "Unckown", в текущей версии добавить человека в БД можно только в ручном режиме, автоматическое добавление на ходится в процессе разработки. 
+# Install
+# Запустить setup.py файл и дождаться у становки основных библиотек
+# cd dlib_easy_install_for_python
+# python pip install dlib-xx.x.x-cpxx-cpxxm-xxxxxx.whl
+# pip install face_recognition
+## Enjoy ;-)
+# Next steps
+1) оптимизировать работу БД( возможно, реализовать частичный поиск на стороне БД, что бы не выгружать всю таблицу) 
+2) Оптимизация вызовов в main - сделать предварительный запуск системы не зависимым от непосредственно распознования.
