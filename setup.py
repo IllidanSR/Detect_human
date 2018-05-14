@@ -1,7 +1,7 @@
 from setuptools import find_packages
 from setuptools import setup
 
-REQUIRED_PACKAGES = ['Pillow>=1.0', 'Matplotlib>=2.1', 'Cython>=0.28.1','Tensorflow-gpu>=1.5','opencv-python>=3.3.0']
+REQUIRED_PACKAGES = ['Pillow>=1.0', 'Matplotlib>=2.1','Tensorflow-gpu>=1.5','opencv-python>=3.3.0']
 setup(
     name='Human detect',
     version='1.0',
