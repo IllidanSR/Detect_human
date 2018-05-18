@@ -15,9 +15,11 @@ class Face_recogn:
     def recogn_face(self, frame):
         #load frame
         rgb_frame = frame[:, :, ::-1]
-
+        #look for face on frame
         face_locations = face_recognition.face_locations(rgb_frame)
+        #encoding finded on frame faces
         face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
+        #for every face, on frame, find nearest from DB(Use Euclide metric)
         for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
             matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
             name = "Unknown"
