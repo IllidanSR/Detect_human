@@ -4,6 +4,7 @@ from utils import label_map_util
 import os
 
 def load_grath(PATH_TO_CKPT):
+    """Load grath to memory, load DNN with all layers"""
     assert os.path.exists(PATH_TO_CKPT),AssertionError("No PATH_TO_CKPT!")
     detection_graph = tf.Graph()
     with detection_graph.as_default():
@@ -16,12 +17,14 @@ def load_grath(PATH_TO_CKPT):
 
 
 def load_image_into_numpy_array(image):
+    """Convert input image to np.array"""
     (im_width, im_height) = image.size
     return np.array(image.getdata()).reshape(
         (im_height, im_width, 3)).astype(np.uint8)
 
 
 def some_load(PATH_TO_LABELS, NUM_CLASSES):
+    """Load lebels and classes. NN return numbers, without words, labels relates object group and NN prediction"""
     label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
     categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES,
                                                                 use_display_name=True)
