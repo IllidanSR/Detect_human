@@ -55,11 +55,11 @@ def main_func(args):
                 (boxes, scores, classes, num_detections) = sess.run(
                     [detection_boxes, detection_scores, detection_classes, num_detections],
                     feed_dict={image_tensor: image_np_expanded})
-                final_score = np.squeeze(scores)
-                count = 0
-                for i in range(100):
-                    if scores is None or final_score[i] > 0.5:
-                        count = count + 1
+                # final_score = np.squeeze(scores)
+                # count = 0
+                # for i in range(100):
+                #     if scores is None or final_score[i] > 0.5:
+                #         count = count + 1
                 #       print(count)
                 vis_util.visualize_boxes_and_labels_on_image_array(
                     image_np,
@@ -69,10 +69,10 @@ def main_func(args):
                     category_index,
                     use_normalized_coordinates=True,
                     line_thickness=8)
-                image_np = face_detect.recogn_face(image_np)
+                # image_np = face_detect.recogn_face(image_np)
                 cv2.imshow('object detection', cv2.resize(image_np, (800, 600)))
                 if cv2.waitKey(25) & 0xFF == ord('q'):
                     cv2.destroyAllWindows()
                     break
 if __name__ == "__main__":
-    main_func(0)
+    main_func("nvarguscamerasrc ! video/x-raw(memory:NVMM), width=(int)1280, height=(int)720,format=(string)NV12, framerate=(fraction)24/1 ! nvvidconv flip-method=2 ! video/x-raw, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink")

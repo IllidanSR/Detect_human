@@ -2,10 +2,10 @@ import face_recognition
 import cv2
 class Face_recogn:
     def __init__(self):
-        self.my_face = face_recognition.load_image_file("face_detect/Sergei.jpg")
+        self.my_face = face_recognition.load_image_file("resource/Sergei.jpg")
         self.my_face_encoding = face_recognition.face_encodings(self.my_face)[0]
         self.known_face_encodings = [
-            self.my_face,
+            self.my_face
         ]
         self.known_face_names = [
             "Sergei"
@@ -15,8 +15,12 @@ class Face_recogn:
         face_locations = face_recognition.face_locations(rgb_frame)
         face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
         for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
-            matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
+            matches = [False]
             name = "Unknown"
+            try:
+                matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
+            except ValueError:
+                print("value error")
             if True in matches:
                 first_match_index = matches.index(True)
                 name = self.known_face_names[first_match_index]

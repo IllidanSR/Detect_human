@@ -667,7 +667,7 @@ def visualize_boxes_and_labels_on_image_array(
     # print("Find {} people in room".format(all_people))
     now = datetime.datetime.now()
     time_now = now.strftime("%d-%m-%Y %H:%M")
-    with open(FILENAME,'a') as file:
+    with open(FILENAME,'w') as file:
         colums = ["Time", "People"]
         writer = csv.DictWriter(file,fieldnames=colums)
         writer.writeheader()
